@@ -6,3 +6,4 @@ struct Vec2
 };
 
 Vec2 operator-(Vec2 A, Vec2 B);
+Vec2 operator/(Vec2 A, float B);

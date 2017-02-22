@@ -6,6 +6,7 @@ class RigidBody
 {
 	Collision collision;
 
+
 public:
 
 	bool isColliding();

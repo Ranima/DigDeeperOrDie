@@ -113,8 +113,10 @@
     <ClCompile Include="Collision.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="RigidBody.cpp" />
+    <ClCompile Include="Vec2.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Bcolider.h" />
     <ClInclude Include="Collision.h" />
     <ClInclude Include="dirtblock.h" />
     <ClInclude Include="gameState.h" />

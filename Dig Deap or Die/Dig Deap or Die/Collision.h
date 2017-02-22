@@ -1,15 +1,13 @@
 #pragma once
 #include "Vec2.h"
+#include "Bcolider.h"
 
 class Collision
 {
 	bool hasCollided = false;
 
 	Vec2 pos;
-	struct Bcolider		//box collider		; use for objects
-	{
-		Vec2 points[4];
-	};
+
 	Vec2 Pcolider;		//point collider	; use for particles
 
 public:
