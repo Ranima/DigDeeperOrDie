@@ -1,7 +1,7 @@
 #pragma once
 
 #ifndef MAX_HULL_SIZE
-#define MAX_HULL_SIZE 6
+#define MAX_HULL_SIZE 4
 #endif
 
 #ifndef TRANS_MAX_CHILDREN

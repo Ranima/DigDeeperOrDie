@@ -102,7 +102,7 @@ public:
 	}
 
 
-	ObjectPool<Entity>::iterator spawnAsteroid(unsigned sprite)
+	ObjectPool<Entity>::iterator spawnAsteroid(unsigned sprite, vec2 SpawnLoc)
 	{
 		auto e = entities.push();
 
@@ -113,9 +113,7 @@ public:
 
 		e->transform->setLocalScale(vec2{ 48,48 });
 
-		e->transform->setGlobalPosition(vec2::fromAngle(randRange(0, 360)*DEG2RAD)*(rand01() * 200 + 64));
-
-		e->rigidbody->addSpin(rand01()*12-6);
+		e->transform->setGlobalPosition(SpawnLoc);
 
 		e->sprite->sprite_id = sprite;
 
