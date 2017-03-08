@@ -22,8 +22,6 @@ class GameState : public BaseState
 	Factory factory;
 	unsigned spr_space, spr_ship, spr_bullet, spr_roid, spr_font;
 	ObjectPool<Entity>::iterator currentCamera;
-	vec2 S1 = ;
-	vec2 S2;
 
 public:
 	virtual void init()
@@ -37,7 +35,6 @@ public:
 
 	virtual void play()
 	{
-		int time = sfw::getDeltaTime();
 
 		// delete any old entities sitting around
 		for (auto it = factory.begin(); it != factory.end(); it->onFree(), it.free());
@@ -50,14 +47,6 @@ public:
 		factory.spawnStaticImage(spr_space, 0, 0, 800, 600);
 
 		factory.spawnPlayer(spr_ship, spr_font);
-		if(time % 2 == 0)
-		{
-			factory.spawnAsteroid(spr_roid, S1);
-		}
-		else 
-		{
-			factory.spawnAsteroid(spr_roid, S2);
-		}
 	}
 
 	virtual void stop()
@@ -74,8 +63,17 @@ public:
 	virtual void step()
 	{
 		float dt = sfw::getDeltaTime();
+		int time = sfw::getDeltaTime();
 
 		// maybe spawn some asteroids here.
+		if (time % 2 == 0)
+		{
+			factory.spawnAsteroid(spr_roid, vec2(800, 600));
+		}
+		else
+		{
+			factory.spawnAsteroid(spr_roid, vec2(800, 0));
+		}
 
 		for(auto it = factory.begin(); it != factory.end();) // no++!
 		{
