@@ -17,10 +17,13 @@ public:
 			rb->addForce(T->getGlobalUp() * speed);
 
 		if (sfw::getKey('A'))
-			rb->addTorque(turnSpeed);
+			rb->addForce((T->getGlobalRight() * -1) * speed);
 
 		if (sfw::getKey('D'))
-			rb->addTorque(-turnSpeed);
+			rb->addForce(T->getGlobalRight() * speed);
+
+		if (sfw::getKey('S'))
+			rb->addForce((T->getGlobalUp() * -1) * speed);
 
 		shotTimer -= dt;
 		if (sfw::getKey(' ') && shotTimer < 0)

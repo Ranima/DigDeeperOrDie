@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Entity.h"
+#include <time.h>
 
 class Factory
 {	
@@ -71,7 +72,7 @@ public:
 		e->sprite->sprite_id = sprite;
 		e->sprite->dimensions = vec2{1.2f, 1.2f};
 
-		e->rigidbody->addImpulse(e->transform->getGlobalUp() * impulse);
+		e->rigidbody->addImpulse(e->transform->getGlobalRight() * impulse);
 
 		e->lifetime->lifespan = 1.6f;
 		
@@ -101,8 +102,23 @@ public:
 		return e;
 	}
 
+	ObjectPool<Entity>::iterator spawnGameOver( unsigned font )
+	{
+		auto e = entities.push();
 
-	ObjectPool<Entity>::iterator spawnAsteroid(unsigned sprite, vec2 SpawnLoc)
+		e->transform = transforms.push();
+		e->text = texts.push();
+
+		e->text->offset = vec2{ 100, 100};
+		e->text->off_scale = vec2{ 1,1 };
+		e->text->setString("Game Over");
+
+		e->transform->setLocalScale(vec2{ 48,48 });
+
+		return e;
+	}
+
+	ObjectPool<Entity>::iterator spawnAsteroid(unsigned sprite, vec2 offset)
 	{
 		auto e = entities.push();
 
@@ -110,10 +126,21 @@ public:
 		e->rigidbody = rigidbodies.push();
 		e->sprite = sprites.push();
 		e->collider = colliders.push();
+		e->lifetime = lifetimes.push();
 
 		e->transform->setLocalScale(vec2{ 48,48 });
 
-		e->transform->setGlobalPosition(SpawnLoc);
+		//e->transform->setGlobalPosition(vec2{ offset.x + 50 , randRange(0, 1) + offset.y });
+		e->rigidbody->addImpulse((e->transform->getGlobalRight() * -1) * 50);
+		std::cout << e->transform->getGlobalPosition().x << " " << e->transform->getGlobalPosition().y << std::endl;
+		std::cout << offset.x << " " << offset.y << std::endl;
+		//srand(time(0));
+
+		std::cout << time(NULL); 
+		float value = rand() % 10 + 1;
+		e->transform->setGlobalPosition(vec2{ 450, rand01() * 600 - 300 });
+
+		e->lifetime->lifespan = 25;
 
 		e->sprite->sprite_id = sprite;
 
