@@ -86,7 +86,7 @@ public:
 		// maybe spawn some asteroids here.
 		if (counter >= 1)
 		{
-			factory.spawnAsteroid(spr_ship, currentCamera->camera->offset);
+			factory.spawnAsteroid(spr_roid, currentCamera->camera->offset);
 			counter -= 1;
 		}
 
@@ -108,7 +108,14 @@ public:
 					factory.spawnBullet(spr_bullet, e.transform->getGlobalPosition()  + e.transform->getGlobalUp()*48,
 											vec2{ 32,32 }, e.transform->getGlobalAngle(), 200, 1);
 				}
+
+				if (e.transform->getGlobalPosition().x <=  -400 || e.transform->getGlobalPosition().y <= -300 || e.transform->getGlobalPosition().x >= 400 || e.transform->getGlobalPosition().y >= 300)
+				{
+					*Game = Gamestates::Gameover;
+				}
+
 			}
+
 			// lifetime decay update
 			if (e.lifetime)
 			{
@@ -154,6 +161,7 @@ public:
 								*Game = Gamestates::Gameover;
 							}
 
+							
 							
 							// condition for static resolution
 							else if (it->rigidbody && !bit->rigidbody)							

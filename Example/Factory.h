@@ -72,7 +72,9 @@ public:
 		e->sprite->sprite_id = sprite;
 		e->sprite->dimensions = vec2{1.2f, 1.2f};
 
-		e->rigidbody->addImpulse(e->transform->getGlobalRight() * impulse);
+		e->rigidbody->addImpulse(e->transform->getGlobalUp() * impulse);
+
+		e->rigidbody->addSpin(-90 * DEG2RAD);
 
 		e->lifetime->lifespan = 1.6f;
 		
@@ -97,6 +99,8 @@ public:
 
 		e->transform->setLocalScale(vec2{48,48});
 
+		e->transform->setLocalAngle(-90 * DEG2RAD);
+
 		e->sprite->sprite_id = sprite;
 
 		return e;
@@ -109,8 +113,9 @@ public:
 		e->transform = transforms.push();
 		e->text = texts.push();
 
-		e->text->offset = vec2{ 100, 100};
-		e->text->off_scale = vec2{ 1,1 };
+		e->text->sprite_id = font;
+		e->text->offset = vec2{ -400, -100};
+		e->text->off_scale = vec2{ 0.5f,0.5f };
 		e->text->setString("Game Over");
 
 		e->transform->setLocalScale(vec2{ 48,48 });
@@ -139,6 +144,8 @@ public:
 		std::cout << time(NULL); 
 		float value = rand() % 10 + 1;
 		e->transform->setGlobalPosition(vec2{ 450, rand01() * 600 - 300 });
+
+		e->rigidbody->addSpin(45 * DEG2RAD);
 
 		e->lifetime->lifespan = 25;
 
