@@ -3,7 +3,7 @@
 #include "sfwdraw.h"
 #include "BaseState.h"
 #include "Factory.h"
-//#include "flops.h"
+
 
 
 /*
@@ -24,8 +24,24 @@ class GameState : public BaseState
 	ObjectPool<Entity>::iterator currentCamera;
 
 public:
+	enum Gamestates
+	{
+		playing,
+		Gameover,
+		Menu1
+	};
+
+	Gamestates* Game;
+
+	GameState(Gamestates* game)
+	{
+		Game = game;
+	}
+
 	virtual void init()
 	{
+		srand(time(0));
+
 		spr_bullet = sfw::loadTextureMap("../res/bullet.png");
 		spr_space = sfw::loadTextureMap("../res/space.jpg");
 		spr_ship = sfw::loadTextureMap("../res/ship.png");
@@ -47,6 +63,8 @@ public:
 		factory.spawnStaticImage(spr_space, 0, 0, 800, 600);
 
 		factory.spawnPlayer(spr_ship, spr_font);
+
+		factory.spawnAsteroid(spr_roid, currentCamera->camera->offset);
 	}
 
 	virtual void stop()
@@ -58,21 +76,19 @@ public:
 	// REMEMBER TO HAVE ENTRY AND STAY states for each application state!
 	virtual size_t next() const { return 0; }
 
-
+	float counter;
 	// update loop, where 'systems' exist
 	virtual void step()
 	{
 		float dt = sfw::getDeltaTime();
-		int time = sfw::getDeltaTime();
+		counter += dt;
+		std::cout << counter << std::endl;
 
 		// maybe spawn some asteroids here.
-		if (time % 2 == 0)
+		if (counter >= .5)
 		{
-			factory.spawnAsteroid(spr_roid, vec2(800, 600));
-		}
-		else
-		{
-			factory.spawnAsteroid(spr_roid, vec2(800, 0));
+			factory.spawnAsteroid(spr_roid, currentCamera->camera->offset);
+			counter -= 1;
 		}
 
 		for(auto it = factory.begin(); it != factory.end();) // no++!
@@ -93,7 +109,14 @@ public:
 					factory.spawnBullet(spr_bullet, e.transform->getGlobalPosition()  + e.transform->getGlobalUp()*48,
 											vec2{ 32,32 }, e.transform->getGlobalAngle(), 200, 1);
 				}
+
+				if (e.transform->getGlobalPosition().x <=  -400 || e.transform->getGlobalPosition().y <= -300 || e.transform->getGlobalPosition().x >= 400 || e.transform->getGlobalPosition().y >= 300)
+				{
+					*Game = Gamestates::Gameover;
+				}
+
 			}
+
 			// lifetime decay update
 			if (e.lifetime)
 			{
@@ -133,6 +156,11 @@ public:
 							// condition for dynamic resolution
 							if (it->rigidbody && bit->rigidbody)
 								base::DynamicResolution(cd,&it->transform,&it->rigidbody, &bit->transform, &bit->rigidbody);
+
+							if (it->controller)
+							{
+								*Game = Gamestates::Gameover;
+							}
 							
 							// condition for static resolution
 							else if (it->rigidbody && !bit->rigidbody)							

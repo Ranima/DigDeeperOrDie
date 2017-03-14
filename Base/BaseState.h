@@ -3,7 +3,6 @@
 
 class BaseState
 {
-
 public:
 	virtual void init() {} // called once, on application startup.
 	virtual void term() {} // called once, on shutdown.
