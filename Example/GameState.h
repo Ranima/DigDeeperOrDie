@@ -27,7 +27,8 @@ public:
 	enum Gamestates
 	{
 		playing,
-		Gameover
+		Gameover,
+		Menu1
 	};
 
 	Gamestates* Game;
@@ -84,7 +85,7 @@ public:
 		std::cout << counter << std::endl;
 
 		// maybe spawn some asteroids here.
-		if (counter >= 1)
+		if (counter >= .5)
 		{
 			factory.spawnAsteroid(spr_roid, currentCamera->camera->offset);
 			counter -= 1;
@@ -160,8 +161,6 @@ public:
 							{
 								*Game = Gamestates::Gameover;
 							}
-
-							
 							
 							// condition for static resolution
 							else if (it->rigidbody && !bit->rigidbody)							

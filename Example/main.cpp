@@ -2,6 +2,7 @@
 #include "sfwdraw.h"
 #include "GameState.h"
 #include "GameOverState.h"
+#include "StartMenu.h"
 
 
 /*
@@ -18,12 +19,14 @@ void main()
 
 	gameOver gameover;
 	GameState gs(&gamestate);
+	menu Menu;
 
+	Menu.init();
 	gs.init(); // called once
-
-	gameover.init(); //is
+	gameover.init();
+	
+	Menu.play();
 	gameover.play();
-
 	gs.play(); // Should be called each time the state is transitioned into
 
 	while (sfw::stepContext())
@@ -37,6 +40,10 @@ void main()
 		case GameState::Gamestates::Gameover:
 			gameover.step();
 			gameover.draw();
+			break;
+		case GameState::Gamestates::Menu1:
+			Menu.step();
+			Menu.draw();
 			break;
 		}
 		//gs.step(); // called each update

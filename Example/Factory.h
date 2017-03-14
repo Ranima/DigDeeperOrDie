@@ -123,6 +123,25 @@ public:
 		return e;
 	}
 
+	ObjectPool<Entity>::iterator spawnstartbutton(unsigned sprite)
+	{
+		auto e = entities.push();
+
+		e->transform = transforms.push();
+		e->rigidbody = rigidbodies.push();
+		e->sprite = sprites.push();
+		e->collider = colliders.push();
+		e->lifetime = lifetimes.push();
+
+		e->sprite->sprite_id = sprite;
+		//e->sprite->offset = vec2{ -400, -300 };
+		e->sprite->dimensions = vec2{ 1.0f,1.0f };
+
+		e->transform->setLocalScale(vec2{ 48,48 });
+		e->transform->setLocalPosition(vec2{ -400, -300 });
+		return e;
+	}
+
 	ObjectPool<Entity>::iterator spawnAsteroid(unsigned sprite, vec2 offset)
 	{
 		auto e = entities.push();
