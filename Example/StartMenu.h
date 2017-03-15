@@ -40,7 +40,7 @@ public:
 
 		std::cout << x << " " << y << std::endl;
 
-		if (sfw::getMouseButton(0))
+		if (sfw::getMouseButton(0) && x >= 375 && x <= 425 && y >= 275 && y <= 325)
 		{
 			//GameState::
 			//*gs.Game = gs.playing;

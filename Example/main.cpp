@@ -26,16 +26,20 @@ void main()
 	gameover.init();
 	
 	Menu.play();
+	gs.play();
 	gameover.play();
-	gs.play(); // Should be called each time the state is transitioned into
 
 	while (sfw::stepContext())
 	{
 		switch (gamestate)
 		{
 		case GameState::Gamestates::playing:
-			gs.step(); // called each update
-			gs.draw(); // called each update
+			//gs.play(); // Should be called each time the state is transitioned into
+			//while(gs.isplaying == true)
+			//{
+				gs.step(); // called each update
+				gs.draw(); // called each update
+			//}
 			break;
 		case GameState::Gamestates::Gameover:
 			gameover.step();

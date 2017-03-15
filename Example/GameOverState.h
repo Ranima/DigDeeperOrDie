@@ -27,11 +27,11 @@ public:
 	virtual void play() 
 	{
 		factory.spawnGameOver(spr_font);
-
 	}
+
 	virtual void step() 
 	{
-		if (sfw::getMouseButton(1))
+		if (sfw::getMouseButton(0))
 		{
 			*currentState = GameState::Gamestates::Menu1;
 		}

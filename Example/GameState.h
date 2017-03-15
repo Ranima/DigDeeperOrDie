@@ -24,6 +24,8 @@ class GameState : public BaseState
 	ObjectPool<Entity>::iterator currentCamera;
 
 public:
+	bool isplaying = true;
+
 	enum Gamestates
 	{
 		playing,
@@ -51,6 +53,7 @@ public:
 
 	virtual void play()
 	{
+		//isplaying = false;
 
 		// delete any old entities sitting around
 		for (auto it = factory.begin(); it != factory.end(); it->onFree(), it.free());
@@ -63,8 +66,6 @@ public:
 		factory.spawnStaticImage(spr_space, 0, 0, 800, 600);
 
 		factory.spawnPlayer(spr_ship, spr_font);
-
-		factory.spawnAsteroid(spr_roid, currentCamera->camera->offset);
 	}
 
 	virtual void stop()
@@ -112,7 +113,10 @@ public:
 
 				if (e.transform->getGlobalPosition().x <=  -400 || e.transform->getGlobalPosition().y <= -300 || e.transform->getGlobalPosition().x >= 400 || e.transform->getGlobalPosition().y >= 300)
 				{
+					SwitchingStates();
 					*Game = Gamestates::Gameover;
+					play();
+					//isplaying = false;
 				}
 
 			}
@@ -159,7 +163,10 @@ public:
 
 							if (it->controller)
 							{
+								SwitchingStates();
 								*Game = Gamestates::Gameover;
+								play();
+								//isplaying = false;
 							}
 							
 							// condition for static resolution
@@ -171,6 +178,12 @@ public:
 
 	}
 
+	void SwitchingStates() {
+		// Deletes all entities
+		//for (auto it = factory.begin(); it != factory.end(); it->onFree(), it.free());
+
+
+	}
 
 	virtual void draw()	
 	{
