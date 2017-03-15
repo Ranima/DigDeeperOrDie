@@ -15,11 +15,11 @@ void main()
 {
 	sfw::initContext();
 
-	GameState::Gamestates gamestate = GameState::Gamestates::playing;
+	GameState::Gamestates gamestate = GameState::Gamestates::Menu1;
 
-	gameOver gameover;
+	gameOver gameover(&gamestate);	// gameover(&gamestate);
 	GameState gs(&gamestate);
-	menu Menu;
+	menu Menu(&gamestate);
 
 	Menu.init();
 	gs.init(); // called once

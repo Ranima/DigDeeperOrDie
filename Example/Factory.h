@@ -134,11 +134,11 @@ public:
 		e->lifetime = lifetimes.push();
 
 		e->sprite->sprite_id = sprite;
-		//e->sprite->offset = vec2{ -400, -300 };
 		e->sprite->dimensions = vec2{ 1.0f,1.0f };
 
 		e->transform->setLocalScale(vec2{ 48,48 });
 		e->transform->setLocalPosition(vec2{ -400, -300 });
+
 		return e;
 	}
 
