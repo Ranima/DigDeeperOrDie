@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+//Game is in example
+
 namespace Exercises
 {
     class Program
@@ -38,27 +40,27 @@ namespace Exercises
             public int guess;
         }
 
-        static player ThePriceIsFuck(player[] Players, int correctNumber)
-        {
-            //int Pcont = 0;
-            player[] temp = Players;
-            for(int i = 0; i < Players.Length; ++i)
-            {
-                if (Players[i].guess == correctNumber)
-                {
-                    return Players[i];
+        //static player ThePriceIsFuck(player[] Players, int correctNumber)
+        //{
+        //    //int Pcont = 0;
+        //    player[] temp = Players;
+        //    for(int i = 0; i < Players.Length; ++i)
+        //    {
+        //        if (Players[i].guess == correctNumber)
+        //        {
+        //            return Players[i];
 
-                    //temp[Pcont] = Players[i];
-                    //++Pcont; 
-                }
-            }
+        //            //temp[Pcont] = Players[i];
+        //            //++Pcont; 
+        //        }
+        //    }
 
 
-            //for(int b = 0; b < Pcont; ++b)
-            //{
-            //    return temp[b];
-            //}
-        }
+        //    //for(int b = 0; b < Pcont; ++b)
+        //    //{
+        //    //    return temp[b];
+        //    //}
+        //}
 
         static void Main(string[] args)
         {
