@@ -201,18 +201,18 @@ public:
 				e.text->draw(&e.transform, cam);
 
 
-#ifdef _DEBUG
-		for each(auto &e in factory)
-			if (e.transform)
-				e.transform->draw(cam);
-
-		for each(auto &e in factory)
-			if (e.transform && e.collider)
-				e.collider->draw(&e.transform, cam);
-
-		for each(auto &e in factory)
-			if (e.transform && e.rigidbody)
-				e.rigidbody->draw(&e.transform, cam);
-#endif
+//#ifdef _DEBUG
+//		for each(auto &e in factory)
+//			if (e.transform)
+//				e.transform->draw(cam);
+//
+//		for each(auto &e in factory)
+//			if (e.transform && e.collider)
+//				e.collider->draw(&e.transform, cam);
+//
+//		for each(auto &e in factory)
+//			if (e.transform && e.rigidbody)
+//				e.rigidbody->draw(&e.transform, cam);
+//#endif
 	}
 };
