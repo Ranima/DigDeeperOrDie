@@ -1,5 +1,7 @@
 #pragma once
 
+//Game is in example
+
 struct Vec2
 {
 	float x, y;
