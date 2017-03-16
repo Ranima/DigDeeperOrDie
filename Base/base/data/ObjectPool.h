@@ -1,5 +1,7 @@
 #pragma once
 
+//the game is in example
+
 namespace base
 {
 

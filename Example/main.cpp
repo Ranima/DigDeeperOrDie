@@ -6,6 +6,10 @@
 
 
 /*
+	This is where the game is
+*/
+
+/*
 	The main function should be used for application state management.
 	Currently, only one state is implemented here, you'll need to add additional
 	and get them to behave properly.
